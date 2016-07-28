@@ -356,6 +356,7 @@ public class PgDiffUtils {
         "ROW",
         "ROWS",
         "ROW_NUMBER",
+        "RULE",
         "SAVEPOINT",
         "SCHEMA",
         "SCOPE",

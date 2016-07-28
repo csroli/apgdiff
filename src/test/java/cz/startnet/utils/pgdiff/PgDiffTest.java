@@ -165,6 +165,12 @@ public class PgDiffTest {
                     {"modify_function_similar", false, false, false, false},
                     // Tests different whitespace formatting in functions
                     {"function_equal_whitespace", false, false, true, false},
+                    // Tests scenario where RULE is added.
+                    {"add_rule", false, false, false, false},
+                    // Tests scenario where RULE is dropped.
+                    {"drop_rule", false, false, false, false},
+                    // Tests scenario where RULE is modified.
+                    {"modify_rule", false, false, false, false},
                     // Tests scenario where TRIGGER is added.
                     {"add_trigger", false, false, false, false},
                     // Tests scenario where TRIGGER is dropped.

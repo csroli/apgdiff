@@ -16,6 +16,7 @@ import cz.startnet.utils.pgdiff.parsers.CreateSchemaParser;
 import cz.startnet.utils.pgdiff.parsers.CreateSequenceParser;
 import cz.startnet.utils.pgdiff.parsers.CreateTableParser;
 import cz.startnet.utils.pgdiff.parsers.CreateTriggerParser;
+import cz.startnet.utils.pgdiff.parsers.CreateRuleParser;
 import cz.startnet.utils.pgdiff.parsers.CreateViewParser;
 import cz.startnet.utils.pgdiff.parsers.GrantRevokeParser;
 import cz.startnet.utils.pgdiff.schema.PgDatabase;
@@ -113,6 +114,12 @@ public class PgDumpLoader { //NOPMD
      */
     private static final Pattern PATTERN_CREATE_TRIGGER = Pattern.compile(
             "^CREATE[\\s]+TRIGGER[\\s]+.*$",
+            Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+    /**
+     * Pattern for testing whether it is CREATE RULE statement.
+     */
+    private static final Pattern PATTERN_CREATE_RULE = Pattern.compile(
+            "^CREATE[\\s]+(?:OR[\\s]+REPLACE[\\s]+)?RULE[\\s]+.*$",
             Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
     /**
      * Pattern for testing whether it is CREATE FUNCTION or CREATE OR REPLACE
@@ -216,6 +223,8 @@ public class PgDumpLoader { //NOPMD
             } else if (PATTERN_CREATE_TRIGGER.matcher(statement).matches()) {
                 CreateTriggerParser.parse(
                         database, statement, ignoreSlonyTriggers);
+            } else if (PATTERN_CREATE_RULE.matcher(statement).matches()) {
+                CreateRuleParser.parse(database, statement);
             } else if (PATTERN_CREATE_FUNCTION.matcher(statement).matches()) {
                 CreateFunctionParser.parse(database, statement);
             } else if (PATTERN_CREATE_TYPE.matcher(statement).matches()) {

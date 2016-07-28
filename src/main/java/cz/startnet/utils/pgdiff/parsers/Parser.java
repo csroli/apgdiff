@@ -330,6 +330,29 @@ public final class Parser {
     }
 
     /**
+     * Returns expression that is end at the expected token or at the end
+     * of expression. If expression is empty then exception is thrown.
+     *
+     * @return expression string
+     */
+    public String getExpressionUntil(final String word) {
+        final int endPos = string.indexOf(word,position);
+
+        if (position == endPos) {
+            throw new ParserException(MessageFormat.format(
+                    Resources.getString("CannotParseStringExpectedExpression"),
+                    string, position + 1,
+                    string.substring(position, position + 20)));
+        }
+
+        final String result = string.substring(position, endPos).trim();
+
+        position = endPos;
+
+        return result;
+    }
+
+    /**
      * Returns position of last character of single command within statement
      * (like CREATE TABLE). Last character is either ',' or ')'. If no such
      * character is found and method reaches the end of the command then

@@ -73,8 +73,9 @@
     <target name="test" depends="compile-tests"
             description="Run the test cases">
         <mkdir dir="${test.reports}"/>
+				<!-- https://github.com/real-logic/simple-binary-encoding/issues/96 -->
         <junit printSummary="yes" haltonerror="true" haltonfailure="true"
-               fork="false" dir=".">
+               fork="true" dir=".">
             <sysproperty key="basedir" value="."/>
             <formatter type="plain" usefile="false"/>
             <classpath>
@@ -93,9 +94,9 @@
     <target name="get-deps" description="Download all dependencies"
             unless="noget">
         <mkdir dir="${lib}"/>
-        <get src="http://mirrors.ibiblio.org/pub/mirrors/maven2/junit/junit/4.8.1/junit-4.8.1.jar"
+        <get src="http://repo1.maven.org/maven2/junit/junit/4.8.1/junit-4.8.1.jar"
              dest="${lib}/junit.jar"/>
-	<get src="http://mirrors.ibiblio.org/pub/mirrors/maven2/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.jar"
+	<get src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hamcrest/hamcrest-all-1.1.jar"
 	     dest="${lib}/hamcrest-all.jar"/>
     </target>
 
