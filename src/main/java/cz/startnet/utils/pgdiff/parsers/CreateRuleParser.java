@@ -38,7 +38,7 @@ public class CreateRuleParser {
         final PgRule rule = new PgRule();
         rule.setName(objectName);
 
-				parser.expect("AS ON");
+				parser.expect("AS", "ON");
 
 				if (parser.expectOptional("INSERT")) {
 						rule.setOnInsert(true);
