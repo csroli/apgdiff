@@ -1,4 +1,5 @@
 /target/
 /lib/
 /build/
+/dist/
 nbactions.xml

@@ -344,7 +344,7 @@ public class PgRule {
             final PgRule rule = (PgRule) object;
             equals = command.equals(rule.getCommand())
                     && name.equals(rule.getName())
-                    && where.equals(rule.getWhere())
+                    && (where == null ? rule.getWhere() == null : where.equals(rule.getWhere()))
                     && (onDelete == rule.isOnDelete())
                     && (onInsert == rule.isOnInsert())
                     && (onUpdate == rule.isOnUpdate())
